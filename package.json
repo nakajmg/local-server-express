@@ -1,0 +1,20 @@
+{
+  "name": "local-server-express",
+  "main": "./lib/local-server-express",
+  "version": "0.0.0",
+  "description": "Serve current project via Express.",
+  "activationCommands": {
+    "atom-workspace": "local-server-express:run"
+  },
+  "repository": "https://github.com/nakajmg/local-server-express",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=0.174.0 <2.0.0"
+  },
+  "dependencies": {
+    "express": "4.0",
+    "open": "0.0.5",
+    "portfinder": "0.2.1",
+    "serve-index": "git://github.com/nakajmg/serve-index"
+  }
+}
