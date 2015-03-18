@@ -6,7 +6,10 @@
   "activationCommands": {
     "atom-workspace": "local-server-express:run"
   },
-  "repository": "https://github.com/nakajmg/local-server-express",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nakajmg/local-server-express"
+  },
   "license": "MIT",
   "engines": {
     "atom": ">=0.174.0 <2.0.0"
@@ -16,5 +19,11 @@
     "open": "0.0.5",
     "portfinder": "0.2.1",
     "serve-index": "git://github.com/nakajmg/serve-index"
+  },
+  "readme": "Serve current project via Express.",
+  "readmeFilename": "README.md",
+  "homepage": "https://github.com/nakajmg/local-server-express",
+  "bugs": {
+    "url": "https://github.com/nakajmg/local-server-express/issues"
   }
 }
