@@ -8,4 +8,4 @@ Serve current project via Express.
 
 or
 
-open menu `cmd+shif+p` then choose `Local Server Express:run`
+open menu `cmd+shift+p` then choose `Local Server Express:run`
