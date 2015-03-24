@@ -23,6 +23,13 @@ class LocalServerExpressView extends View
       @startServer port
 
   startServer: (port) ->
+    path = require 'path'
+    editor = atom.workspace.getActivePaneItem()
+    file = editor?.buffer.file
+    filePath = file?.path
+    filePath = path.relative(atom.project.getPath(), filePath)
+    filePath = if path.extname(filePath) is '.html' then filePath else ''
+    
     open = require 'open'
     express = require 'express'
     app = express()
@@ -34,4 +41,4 @@ class LocalServerExpressView extends View
     
     app.listen port
     
-    open "http://localhost:#{port}"
+    open "http://localhost:#{port}/#{filePath}"
