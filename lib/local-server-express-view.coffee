@@ -27,7 +27,6 @@ class LocalServerExpressView extends View
     editor = atom.workspace.getActivePaneItem()
     file = editor?.buffer.file
     filePath = file?.path
-    console.log typeof filePath
     if typeof filePath == 'string'
       filePath = path.relative(atom.project.getPath(), filePath)
       filePath = if path.extname(filePath) is '.html' then filePath else ''
