@@ -1,7 +1,7 @@
 {
   "name": "local-server-express",
   "main": "./lib/local-server-express",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Serve current project via Express.\n`ctrl+alt+cmd+s` then serve current project and open browser.",
   "repository": {
     "type": "git",
