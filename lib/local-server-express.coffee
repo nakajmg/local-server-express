@@ -7,29 +7,33 @@ portfinder = require 'portfinder'
 module.exports =
   activate: (state) ->
     atom.commands.add "atom-workspace", "local-server-express:run", => @start()
+    @server = []
     
   start: ->
     portfinder.getPort (err, port) =>
       @run port
   
   deactivate: ->
-    @app?.close()
-    @app = null
+    @server.forEach (project) ->
+      project.server?.close()
+
+    @server = null
   
   serialize: ->
 
   run: (port) ->
     [projectPath ,filePath] = @getPaths()
     
-    unless @app
-      @app = express()
-      @port = port
-      @app.use express.static projectPath
-      @app.use serveIndex projectPath,
+    unless @server[projectPath]
+      server = express()
+      server.use express.static projectPath
+      server.use serveIndex projectPath,
         icons: true
-      @app.listen port
-
-    open "http://localhost:#{@port}/#{filePath}"
+      server.listen port
+      
+      @server[projectPath] = {server, port}
+      
+    open "http://localhost:#{@server[projectPath].port}/#{filePath}"
 
   getPaths: ->
     editor = atom.workspace.getActivePaneItem()
