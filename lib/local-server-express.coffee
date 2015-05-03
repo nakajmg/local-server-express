@@ -1,8 +1,8 @@
-open = require 'open'
-path = require 'path'
-express = require 'express'
-serveIndex = require 'serve-index'
-portfinder = require 'portfinder'
+open = require "open"
+path = require "path"
+express = require "express"
+serveIndex = require "serve-index"
+portfinder = require "portfinder"
 
 module.exports =
   activate: (state) ->
@@ -24,6 +24,10 @@ module.exports =
   run: (port) ->
     [projectPath ,filePath] = @getPaths()
     
+    if !projectPath
+      console.warn "[local-server-express] must be open some project."
+      return
+    
     unless @server[projectPath]
       server = express()
       server.use express.static projectPath
@@ -43,15 +47,19 @@ module.exports =
     projectPaths = atom.project.getPaths()
     activeProjectPath = null
     
-    projectPaths.forEach (projectPath) ->
-      if filePath.indexOf(projectPath) isnt -1
-        activeProjectPath = projectPath
+    if filePath
+      projectPaths.forEach (projectPath) ->
+        if filePath.indexOf(projectPath) isnt -1
+          activeProjectPath = projectPath
 
-    if typeof filePath == 'string'
-      
-      filePath = path.relative(activeProjectPath, filePath)
-      filePath = if path.extname(filePath) is '.html' then filePath else ''
+      if typeof filePath == "string"
+        filePath = path.relative(activeProjectPath, filePath)
+        filePath = if path.extname(filePath) is ".html" then filePath else ""
+      else
+        filePath = ""
+        
     else
-      filePath = ''
+      activeProjectPath = projectPaths[0]
+      filePath = ""
 
-    return [activeProjectPath, filePath]
+    [activeProjectPath, filePath]
