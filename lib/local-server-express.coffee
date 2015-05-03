@@ -25,7 +25,7 @@ module.exports =
     [projectPath ,filePath] = @getPaths()
     
     if !projectPath
-      console.warn "[local-server-express] must be open some project."
+      atom.notifications.addWarning "[local-server-express] must be open some project."
       return
     
     unless @server[projectPath]
